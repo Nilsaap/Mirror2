@@ -55,6 +55,16 @@ public class PlayerController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isGrounded)
+        {
+            transform.position += Vector3.left * Time.deltaTime * runSpeed;
+            if (Input.GetKeyDown("space"))
+            {
+                //transform.Translate(new Vector3(0, jumpSpeed, 0));
+                _moveDir.y = jumpSpeed;
+                
+            }
+        }
         isLP = isLocalPlayer;
         if (!isLocalPlayer)
         {

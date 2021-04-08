@@ -22,7 +22,8 @@ public class Health : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Bar.fillAmount = playerHealth / 100;
+        text.text = playerHealth.ToString();
         
     }
     public void takeDamage(float damage)
