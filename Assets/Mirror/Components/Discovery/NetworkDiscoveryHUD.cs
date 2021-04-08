@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 namespace Mirror.Discovery
 {
@@ -83,6 +84,7 @@ namespace Mirror.Discovery
 
         void Connect(ServerResponse info)
         {
+            //GameObject.Find("Manager").GetComponent<UnityEngine.>
             NetworkManager.singleton.StartClient(info.uri);
         }
 
