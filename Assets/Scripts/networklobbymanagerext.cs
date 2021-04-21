@@ -14,14 +14,8 @@ public class networklobbymanagerext : NetworkRoomManager
     public playerchatwindow chatWindow;
     public string PlayerName { get; set; }
 
-    public void host()
-    { 
 
-        address = networkAddress;
-        //StartServer();
-        Debug.Log("Server Has Begun!!!!!");
-        StartHost();
-    }
+
 
     //public class CreatePlayerMessage : MessageBase
     //{
@@ -70,16 +64,6 @@ public class networklobbymanagerext : NetworkRoomManager
         Debug.Log("Hola");
     }
 
-    public void Client()
-    {
-        //todo: get text for ip adress
-        networkAddress = joinIpadress.text;
-        StartClient();
-    }
-    public void Update()
-    {
-        
-        
-    }
+ 
 
 }
