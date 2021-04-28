@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Mirror.Discovery
 {
@@ -10,6 +11,11 @@ namespace Mirror.Discovery
         public Dictionary<long, ServerResponse> discoveredServers = new Dictionary<long, ServerResponse>();
         public NetworkDiscovery networkDiscovery;
         public networklobbymanagerext networkLobby;
+
+        public Transform serverList;
+        public GameObject ConnectionObj;
+        public GameObject Panel;
+        public GameObject LobbyPanel;
 
 #if UNITY_EDITOR
         void OnValidate()
@@ -23,23 +29,32 @@ namespace Mirror.Discovery
         }
 #endif
 
-        public void discoverServer() {
+        public void discoverServer()
+        {
             discoveredServers.Clear();
+            
+            foreach (Transform child in serverList)
+            {
+                Destroy(child.gameObject);
+            }
             networkDiscovery.StartDiscovery();
         }
 
-        public void host() {
-            
+        public void host()
+        {
+
             discoveredServers.Clear();
             networkLobby.StartHost();
             networkDiscovery.AdvertiseServer();
         }
 
-        public void server() {
+        public void server()
+        {
             discoveredServers.Clear();
             networkLobby.StartServer();
 
             networkDiscovery.AdvertiseServer();
+            
         }
 
 
@@ -47,26 +62,31 @@ namespace Mirror.Discovery
         {
 
 
-            if (discoveredServers.Count > 1) {
+            if (discoveredServers.Count > 1)
+            {
                 Debug.Log("Found " + discoveredServers.Count.ToString() + " severs");
 
+
                 //UI Setup
-                //foreach (ServerResponse info in discoveredServers.Values)
-                    //info.EndPoint.Address.ToString()
-                     //   Connect(info);
+                
 
 
             }
         }
 
-        public void Connect() {
-            networkLobby.networkAddress = "172.26.80.1";
+        public void Connect()
+        {
+            //networkLobby.networkAddress = "172.26.80.1";
+            networkLobby.networkAddress = "23.241.6.7";
+            Panel.SetActive(false);
+            LobbyPanel.SetActive(true);
             networkLobby.StartClient();
+            //networkLobby.StartClient(information.uri);
 
             //if (discoveredServers.Count > 1)
             //{
             //    networkLobby.networkAddress = "172.26.80.1";
-                //networkLobby.StartClient(discoveredServers[0].uri);
+            //networkLobby.StartClient(discoveredServers[0].uri);
             //    networkLobby.StartClient();
             //}
             //else {
@@ -78,6 +98,15 @@ namespace Mirror.Discovery
         {
             // Note that you can check the versioning to decide if you can connect to the server or not using this method
             discoveredServers[info.serverId] = info;
+            
+            if (GameObject.Find("Server_" + info.serverId.ToString()) == null)
+            {
+
+                GameObject newConnectionString = Instantiate(ConnectionObj, serverList);
+                newConnectionString.name = "Server_" + info.serverId.ToString();
+                newConnectionString.GetComponentInChildren<Text>().text = "Server_" + info.serverId.ToString()+"_"+info.EndPoint.Address.ToString();
+                newConnectionString.GetComponentInChildren<Button>().onClick.AddListener(delegate { Connect(); });
+            }
         }
     }
 

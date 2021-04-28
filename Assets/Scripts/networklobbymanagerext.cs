@@ -57,6 +57,8 @@ public class networklobbymanagerext : NetworkRoomManager
             ipadresstext = GameObject.FindGameObjectWithTag("Ip").GetComponent<Text>();
             ipadresstext.text = address;
         }
+
+
     }
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
