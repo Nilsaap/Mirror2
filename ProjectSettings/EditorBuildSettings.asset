@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/level 1.unity
     guid: bc36975a1696d3a419c5485ff47a8217
   - enabled: 1
+    path: Assets/Scenes/Snow.unity
+    guid: f47c592b05a65ee49b6d550fb05dd96c
+  - enabled: 1
     path: Assets/Scenes/level 2.unity
     guid: 50f15246abaac29419db7896e7a87a3f
   - enabled: 1
